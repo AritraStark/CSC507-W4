@@ -5,9 +5,8 @@ RAW_DIR=results/raw
 PROC_DIR=results/processed
 mkdir -p $PROC_DIR
 
-# Average over repeats and split into time + memory files
 for file in $RAW_DIR/*.txt; do
-    algo=$(basename $file .txt)  # e.g. VARM_BFS
+    algo=$(basename $file .txt)
     outfile_time="$PROC_DIR/${algo}_time.dat"
     outfile_mem="$PROC_DIR/${algo}_mem.dat"
 
@@ -29,7 +28,6 @@ for file in $RAW_DIR/*.txt; do
         }
     }' "$file"
 
-    # Sort by N (col1) then M (col2) for readability
     sort -k1,1n -k2,2n -o "$outfile_time" "$outfile_time"
     sort -k1,1n -k2,2n -o "$outfile_mem" "$outfile_mem"
 done

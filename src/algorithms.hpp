@@ -5,7 +5,7 @@
 double getMemoryUsageMB() {
     struct rusage usage;
     getrusage(RUSAGE_SELF, &usage);
-    return usage.ru_maxrss / 1024.0; // ru_maxrss is in KB
+    return usage.ru_maxrss / 1024.0; 
 }
 
 void BFS(const Graph& g,int start=0){
@@ -80,44 +80,52 @@ void DIJKSTRA(const Graph& g,int start=0){
     }
 }
 
-void SCC1(const Graph& g){
+void SCC1(const Graph& g) {
     int n = g.size();
     Graph gR = g.reverseGraph();
     vector<int> comp(n, -1);
-    int cid = 0;
+    int cid = 0; 
 
-    for(int i=0; i<n; i++){
-        if(comp[i] == -1){
-            cid++;
-            vector<bool> visG(n,false), visGR(n,false);
+    for(int i = 0; i < n; i++) {
+        if(comp[i] == -1) {
+            cid++;  // New component
+            vector<bool> visG(n, false);
+            vector<bool> visGR(n, false);
 
             stack<int> st;
             st.push(i);
-            while(!st.empty()){
-                int u=st.top(); 
+            while(!st.empty()) {
+                int u = st.top();
                 st.pop();
-                if(visG[u]) continue;
-                visG[u]=true;
-                for(auto node : g.neighbors(u)) {
-                    int v = node.first;
-                    if(!visG[v]) st.push(v);
+                if(!visG[u]) {
+                    visG[u] = true;
+                    for(auto node : g.neighbors(u)) {
+                        if(!visG[node.first]) {
+                            st.push(node.first);
+                        }
+                    }
                 }
             }
 
             st.push(i);
-            while(!st.empty()){
-                int u=st.top(); st.pop();
-                if(visGR[u]) continue;
-                visGR[u]=true;
-                for(auto node : gR.neighbors(u)) {
-                    int v = node.first;
-                    if(!visGR[v]) st.push(v);
+            while(!st.empty()) {
+                int u = st.top();
+                st.pop();
+                if(!visGR[u]) {
+                    visGR[u] = true;
+                    for(auto node : gR.neighbors(u)) {
+                        if(!visGR[node.first]) {
+                            st.push(node.first);
+                        }
+                    }
                 }
             }
 
-            for(int v=0; v<n; v++)
-                if(visG[v] && visGR[v])
+            for(int v = 0; v < n; v++) {
+                if(visG[v] && visGR[v]) {
                     comp[v] = cid;
+                }
+            }
         }
     }
 }
