@@ -1,0 +1,19 @@
+REPORT on the findings and performance:
+After analyzing the the performance of BFS, DFS(iterative and recursive), Dijkstra's and SCC(1, 2, 3) algorithms
+and going through their plotted graphs we can observe prominent trends. These trends can be described as follows: 
+For VARN: 
+    Time Complexity: 
+        1. For small values of N the execution times are nearly 0. 
+        2. At N = 900 to 1000 there's a sudden jump in execution time for algorithms. 
+        3. SCC3(Tarjan's) has the highest time complexity due to the overhead of multiple DFS traversals. 
+    Space Complexity: 
+        1. Memory usage scales steadily with increase in N.
+        2. Graph shows almost identical pattern in memory usage due to adjacency lists. 
+For VARM: 
+    Time Complexity: 
+        1. Time complexity increases with increase in M, the graph becomes quite chaotic. 
+        2. The order of algorithms in best to worst becomes: BFS/DFS, Dijkstra, SCCs. 
+        3. For smaller M values the algorithms perform similar and stable. 
+    Space Complexity: 
+        1. Memory consumption scales linearly with increase in M. 
+        2. All algorithms are quite similar due to adjacency lists being the main contributing factor. 
